@@ -58,31 +58,31 @@
 	[fg.widthAnchor constraintEqualToConstant:100].active = YES;
 
 	// capture button view contents
-	CGSize size = CGSizeMake(103, 103);
+	CGSize size = CGSizeMake(110, 110);
 	UIGraphicsBeginImageContext(size);
 	CGContextRef context = UIGraphicsGetCurrentContext();
-	CGContextSetFillColorWithColor(context, [UIColor HCBlueColor].CGColor);
+	CGContextSetFillColorWithColor(context, [UIColor HCGlowColor].CGColor);
 	CGContextFillEllipseInRect(context, CGRectMake(0, 0, size.width, size.height));
 	UIImage *circle = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	// blur it
 	CIFilter *blurFilter = [CIFilter filterWithName:@"CIGaussianBlur"];
 	[blurFilter setValue:[CIImage imageWithCGImage:circle.CGImage] forKey:@"inputImage"];
-	[blurFilter setValue:@4.0f forKey:@"inputRadius"];
+	[blurFilter setValue:@5.0f forKey:@"inputRadius"];
 	CIImage *filterOutput = [blurFilter valueForKey:@"outputImage"];
 	UIImage *blur = [[UIImage alloc] initWithCIImage:filterOutput];
 	// insert it into the view stack
 	UIImageView *imageView = [[UIImageView alloc] initWithImage:blur];
 	[imageView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	[bg addSubview:imageView];
-	[imageView.centerYAnchor constraintEqualToAnchor:button.centerYAnchor].active = YES;
-	[imageView.centerXAnchor constraintEqualToAnchor:button.centerXAnchor].active = YES;
+	[imageView.centerYAnchor constraintEqualToAnchor:button.centerYAnchor constant:-1].active = YES; // the blur is a bit off-center
+	[imageView.centerXAnchor constraintEqualToAnchor:button.centerXAnchor constant:1].active = YES;
 
 	CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
 	[animation setDuration:0.6];
 	[animation setRepeatCount:HUGE_VALF];
 	[animation setAutoreverses:YES];
-	[animation setFromValue:@(1)];
+	[animation setFromValue:@(0.6)];
 	[animation setToValue:@(0.1)];
 	[imageView.layer addAnimation:animation forKey:@"animateOpacity"];
 

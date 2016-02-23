@@ -9,5 +9,6 @@
 @interface UIColor (HC)
 
 + (UIColor *)HCBlueColor;
++ (UIColor *)HCGlowColor;
 
 @end
