@@ -9,11 +9,18 @@
 
 #import "ViewController.h"
 #import "UIColor+HC.h"
+#import "Button.h"
 
 
 @interface ViewController ()
 
 @end
+
+static const int controlSpacing = 20;
+static const int buttonSize = 100;
+static const float buttonBlurScale = 1.08;
+static const float buttonBlurRadius = 2.2;
+static const float buttonPulseDuration = 0.8;
 
 @implementation ViewController
 
@@ -27,72 +34,59 @@
 	[field1 setBorderStyle:UITextBorderStyleRoundedRect];
 	[field1 setBackgroundColor:[UIColor whiteColor]];
 	[self.view addSubview:field1];
-	[field1.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor].active = YES;
-	[field1.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor].active = YES;
+	[field1.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:controlSpacing].active = YES;
+	[field1.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:controlSpacing].active = YES;
 
-	UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+	Button *button = [Button buttonWithType:UIButtonTypeCustom];
 	[button setTranslatesAutoresizingMaskIntoConstraints:NO];
 	[button setTitle:@"Test" forState:UIControlStateNormal];
+	[button setColor:[UIColor HCBlueColor]];
+	[button setHighlightColor:[UIColor HCDarkBlueColor]];
+	[button setBlurColor:[UIColor HCGlowColor]];
+	[button setBlurScale:buttonBlurScale];
+	[button setBlurRadius:buttonBlurRadius];
+	[button setPulseDuration:buttonPulseDuration];
 	[self.view addSubview:button];
-	[button.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:100].active = YES;
-	[button.heightAnchor constraintEqualToConstant:100].active = YES;
+	[button.topAnchor constraintEqualToAnchor:field1.bottomAnchor constant:controlSpacing].active = YES;
 	[button.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-	[button.widthAnchor constraintEqualToConstant:100].active = YES;
-
-	UIView  *bg = [[UIView alloc] init];
-	[bg setTranslatesAutoresizingMaskIntoConstraints:NO];
-	[button addSubview:bg];
-	[bg.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:100].active = YES;
-	[bg.heightAnchor constraintEqualToConstant:100].active = YES;
-	[bg.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-	[bg.widthAnchor constraintEqualToConstant:100].active = YES;
-
-	UIView *fg = [[UIView alloc] init];
-	[fg setTranslatesAutoresizingMaskIntoConstraints:NO];
-	[fg setBackgroundColor:[UIColor HCBlueColor]];
-	[fg.layer setCornerRadius:50];
-	[button addSubview:fg];
-	[fg.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:100].active = YES;
-	[fg.heightAnchor constraintEqualToConstant:100].active = YES;
-	[fg.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-	[fg.widthAnchor constraintEqualToConstant:100].active = YES;
-
-	// capture button view contents
-	CGSize size = CGSizeMake(110, 110);
-	UIGraphicsBeginImageContext(size);
-	CGContextRef context = UIGraphicsGetCurrentContext();
-	CGContextSetFillColorWithColor(context, [UIColor HCGlowColor].CGColor);
-	CGContextFillEllipseInRect(context, CGRectMake(0, 0, size.width, size.height));
-	UIImage *circle = UIGraphicsGetImageFromCurrentImageContext();
-	UIGraphicsEndImageContext();
-	// blur it
-	CIFilter *blurFilter = [CIFilter filterWithName:@"CIGaussianBlur"];
-	[blurFilter setValue:[CIImage imageWithCGImage:circle.CGImage] forKey:@"inputImage"];
-	[blurFilter setValue:@5.0f forKey:@"inputRadius"];
-	CIImage *filterOutput = [blurFilter valueForKey:@"outputImage"];
-	UIImage *blur = [[UIImage alloc] initWithCIImage:filterOutput];
-	// insert it into the view stack
-	UIImageView *imageView = [[UIImageView alloc] initWithImage:blur];
-	[imageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-	[bg addSubview:imageView];
-	[imageView.centerYAnchor constraintEqualToAnchor:button.centerYAnchor constant:-1].active = YES; // the blur is a bit off-center
-	[imageView.centerXAnchor constraintEqualToAnchor:button.centerXAnchor constant:1].active = YES;
-
-	CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-	[animation setDuration:0.6];
-	[animation setRepeatCount:HUGE_VALF];
-	[animation setAutoreverses:YES];
-	[animation setFromValue:@(0.6)];
-	[animation setToValue:@(0.1)];
-	[imageView.layer addAnimation:animation forKey:@"animateOpacity"];
+	[button.heightAnchor constraintEqualToConstant:buttonSize].active = YES;
+	[button.widthAnchor constraintEqualToConstant:buttonSize].active = YES;
 
 	UITextField *field2 = [[UITextField alloc] init];
 	[field2 setTranslatesAutoresizingMaskIntoConstraints:NO];
 	[field2 setText:@"this is some control after the button"];
 	[field2 setBorderStyle:UITextBorderStyleRoundedRect];
-	[field2 setBackgroundColor:[UIColor whiteColor]];	[self.view addSubview:field2];
-	[field2.topAnchor constraintEqualToAnchor:button.bottomAnchor constant:50].active = YES;
-	[field2.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor].active = YES;
+	[field2 setBackgroundColor:[UIColor whiteColor]];
+	[self.view addSubview:field2];
+	[field2.topAnchor constraintEqualToAnchor:button.bottomAnchor constant:controlSpacing].active = YES;
+	[field2.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:controlSpacing].active = YES;
+
+	UITextField *field3 = [[UITextField alloc] init];
+	[field3 setTranslatesAutoresizingMaskIntoConstraints:NO];
+	[field3 setText:@"this is another control"];
+	[field3 setBorderStyle:UITextBorderStyleRoundedRect];
+	[field3 setBackgroundColor:[UIColor whiteColor]];
+	[self.view addSubview:field3];
+	[field3.topAnchor constraintEqualToAnchor:field2.bottomAnchor constant:controlSpacing].active = YES;
+	[field3.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:controlSpacing].active = YES;
+
+	UITextField *field4 = [[UITextField alloc] init];
+	[field4 setTranslatesAutoresizingMaskIntoConstraints:NO];
+	[field4 setText:@"this is the last control"];
+	[field4 setBorderStyle:UITextBorderStyleRoundedRect];
+	[field4 setBackgroundColor:[UIColor whiteColor]];
+	[self.view addSubview:field4];
+	[field4.topAnchor constraintEqualToAnchor:field3.bottomAnchor constant:controlSpacing].active = YES;
+	[field4.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:controlSpacing].active = YES;
+
+	UIButton *button2 = [UIButton buttonWithType:UIButtonTypeCustom];
+	[button2 setTranslatesAutoresizingMaskIntoConstraints:NO];
+	[button2 setTitle:@"Test" forState:UIControlStateNormal];
+	[self.view addSubview:button2];
+	[button2.topAnchor constraintEqualToAnchor:field4.bottomAnchor constant:controlSpacing].active = YES;
+	[button2.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+	[button2.heightAnchor constraintEqualToConstant:buttonSize].active = YES;
+	[button2.widthAnchor constraintEqualToConstant:buttonSize].active = YES;
 
 }
 

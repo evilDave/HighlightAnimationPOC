@@ -13,6 +13,7 @@
 		7997A58812CB6B1E4C071C52 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997AAAFA776E82A6E637B0E /* AppDelegate.m */; };
 		7997A5A566D048F51081A96A /* UIColor+HC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997AB61FF6494F936F2A363 /* UIColor+HC.m */; };
 		7997A93876A9955072844F35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7997ACCFA790D6D4B7FEC7EA /* LaunchScreen.storyboard */; };
+		7997AE661FEB686594A44933 /* Button.m in Sources */ = {isa = PBXBuildFile; fileRef = 7997A74DCE1884346F703E65 /* Button.m */; };
 		7997AEFCF5F19BAA8C876F1C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7997AA65B6DEC97AD733C092 /* Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -21,9 +22,11 @@
 		7997A2D77292563A61F26E65 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		7997A367764D3CA2015A7665 /* HighlightAnimationPOC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HighlightAnimationPOC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7997A42180A2CBD2170EE855 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7997A74DCE1884346F703E65 /* Button.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Button.m; sourceTree = "<group>"; };
 		7997A836DCF08F5F42972520 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7997AA6450A256E7F42F02D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7997AA65B6DEC97AD733C092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
+		7997AA7AD66BFDE007479781 /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Button.h; sourceTree = "<group>"; };
 		7997AAAFA776E82A6E637B0E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7997AB61FF6494F936F2A363 /* UIColor+HC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HC.m"; sourceTree = "<group>"; };
 		7997AF2C1735B736A7D66F10 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -78,6 +81,8 @@
 				7997A192D8B15C55E60F51E0 /* ViewController.m */,
 				7997AB61FF6494F936F2A363 /* UIColor+HC.m */,
 				7997AF7D89AF3FD26495E749 /* UIColor+HC.h */,
+				7997A74DCE1884346F703E65 /* Button.m */,
+				7997AA7AD66BFDE007479781 /* Button.h */,
 			);
 			path = HighlightAnimationPOC;
 			sourceTree = "<group>";
@@ -149,6 +154,7 @@
 				7997A58812CB6B1E4C071C52 /* AppDelegate.m in Sources */,
 				7997A2088323192E21F8627B /* ViewController.m in Sources */,
 				7997A5A566D048F51081A96A /* UIColor+HC.m in Sources */,
+				7997AE661FEB686594A44933 /* Button.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

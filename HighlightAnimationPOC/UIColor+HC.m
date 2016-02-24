@@ -12,7 +12,11 @@
 }
 
 + (UIColor *)HCGlowColor {
-	return [UIColor colorWithRed:0.0f/255 green:204.0f/255 blue:255.0f/255 alpha:1.0f];
+	return [UIColor colorWithRed:20.0f/255 green:204.0f/255 blue:240.0f/255 alpha:1.0f];
+}
+
++ (UIColor *)HCDarkBlueColor {
+	return [UIColor colorWithRed:0.0f/255 green:154.0f/255 blue:220.0f/255 alpha:1.0f];
 }
 
 @end

@@ -10,5 +10,6 @@
 
 + (UIColor *)HCBlueColor;
 + (UIColor *)HCGlowColor;
++ (UIColor *)HCDarkBlueColor;
 
 @end
